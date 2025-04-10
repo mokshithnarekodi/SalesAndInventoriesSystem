@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="4" parallel="tests" name="SIS_suite_distributedParallel">
+  <test   name="Test1">
+   <classes>
+     
+      <class name="com.sis.POSTest.AddToCartTest"/>
+      <class name="com.sis.customerTest.CreateCustomerTest"/>
+      <class name="com.sis.supplierTest.SupplierTest"/>
+      <class name="com.sis.customerTest.CreateCustomerVerifyInPosTest"/>
+    </classes>
+  </test>
+    <test   name="Test2">
+    <classes>
+       <class name="com.sis.customerTest.CustomerPageTest"/>
+      <class name="com.sis.CreateProductTest.CreateProductTest"/>
+      <class name="com.sis.inventoryTest.InventoryTest"/>
+      <class name="com.sis.productTest.VerifyPoductInPosPageTest"/>
+     
+    </classes>
+  </test><!-- Test -->
+</suite> <!-- SIS_suite_distributedParallel -->
+ 
