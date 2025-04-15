@@ -19,6 +19,7 @@ public class CreateCustomerPage {
 	private WebElement phoneNumberEdit;
 	@FindBy(xpath = "(//button[@type='submit'])[1]")
 	private WebElement saveBtn;
+	
 	public WebElement getFirstNameEdit() {
 		return firstNameEdit;
 	}

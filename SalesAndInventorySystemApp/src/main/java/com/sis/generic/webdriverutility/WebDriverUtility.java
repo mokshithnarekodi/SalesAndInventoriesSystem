@@ -3,6 +3,7 @@ package com.sis.generic.webdriverutility;
 import java.time.Duration;
 import java.util.Set;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WebDriverUtility {
+	JavascriptExecutor js=(JavascriptExecutor)ThreadLocalUtility.getDriver();
 	public void acceptAlert(WebDriver driver) {
 		driver.switchTo().alert().accept();
 	}
@@ -99,5 +101,11 @@ public class WebDriverUtility {
 		Actions action=new Actions(driver);
 		action.doubleClick(element);
 	}
-	
+	public void click(WebElement element) {
+		js.executeScript("arguments[0].click();", element);
+	}
+	public void enterData(WebElement element, String data) {
+		js.executeScript("arguments[0].value='"+data+"';", element);
+
+	}
 }

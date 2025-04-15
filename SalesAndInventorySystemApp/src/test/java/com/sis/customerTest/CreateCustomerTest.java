@@ -1,5 +1,6 @@
 package com.sis.customerTest;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -29,38 +30,45 @@ public class CreateCustomerTest extends BaseClass{
 		ThreadLocalUtility.getTest().log(Status.INFO, "navigate to customerpage");
 
 		HomePage hp=new HomePage(driver);
-		hp.getCustomerLink().click();
+		//hp.getCustomerLink().click();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", hp.getCustomerLink());
 		ThreadLocalUtility.getTest().log(Status.INFO, "navigate to create customerpage");
 
 		CustomerPage cp=new CustomerPage(driver);
-		cp.getCreateCustomerBtn().click();
+		
+        js.executeScript("arguments[0].click();", cp.getCreateCustomerBtn());
+		//cp.getCreateCustomerBtn().click();
 		ThreadLocalUtility.getTest().log(Status.INFO, "create customer by filling all the data");
 
 		CreateCustomerPage ccp=new CreateCustomerPage(driver);
 		
 		wlib.waitForElementPresent(driver, ccp.getFirstNameEdit());
-		ccp.getFirstNameEdit().sendKeys(firstname);
+		//ccp.getFirstNameEdit().sendKeys(firstname);
+		js.executeScript("arguments[0].value='"+firstname+"';", ccp.getFirstNameEdit());
+
 		wlib.waitForElementPresent(driver, ccp.getLastNameEdit());
+		js.executeScript("arguments[0].value='"+lastname+"';", ccp.getLastNameEdit());
 
-		ccp.getLastNameEdit().sendKeys(lastname);
+		//ccp.getLastNameEdit().sendKeys(lastname);
 		wlib.waitForElementPresent(driver, ccp.getPhoneNumberEdit());
+		js.executeScript("arguments[0].value='"+phonenum+"';", ccp.getPhoneNumberEdit());
 
-		ccp.getPhoneNumberEdit().sendKeys(phonenum);
-		Thread.sleep(1000);
-		ccp.getSaveBtn().click();
+		//ccp.getPhoneNumberEdit().sendKeys(phonenum);
+		//ccp.getSaveBtn().click();
+        js.executeScript("arguments[0].click();", ccp.getSaveBtn());
+
 		ThreadLocalUtility.getTest().log(Status.INFO, "verifying customer creation");
 
-		cp.getSearchTextEdit().sendKeys(firstname+" "+lastname);
-		Thread.sleep(500);
+		//cp.getSearchTextEdit().sendKeys(firstname+" "+lastname);
+		
 		wlib.waitForElementPresent(driver, cp.getFirstName());
 
 		Assert.assertEquals(cp.getFirstName().getText(), firstname);
 		ThreadLocalUtility.getTest().log(Status.PASS, "first name verified successfully");
-		Thread.sleep(500);
 	
 		Assert.assertEquals(cp.getLastName().getText(), lastname);
 		ThreadLocalUtility.getTest().log(Status.PASS, "last name verified successfully");
-		Thread.sleep(500);
 		Assert.assertEquals(cp.getPhoneNumber().getText(), phonenum);
 		ThreadLocalUtility.getTest().log(Status.PASS, "phone number verified successfully");
 

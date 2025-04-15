@@ -35,7 +35,8 @@ public class BaseClass {
 	}
 	@Parameters("browser")
 	@BeforeClass
-	public void configBC(@Optional("edge") String browser) throws Throwable {
+	public void configBC(@Optional("chrome") String browser) throws Throwable {
+		System.out.println("launch browser");
 
 		//String browser = flib.getDataFromPropertyFile("browser");
 		if(browser.equalsIgnoreCase("chrome")) {
@@ -60,6 +61,7 @@ public class BaseClass {
 	}
 	@BeforeMethod
 	public void configBM() throws Throwable {
+		System.out.println("login");
 		wlib.waitForPageToLoad(driver);
 		String url = flib.getDataFromPropertyFile("url");
 		driver.get(url);
@@ -67,6 +69,7 @@ public class BaseClass {
 	}
 	@AfterMethod
 	public void configAM() {
+		System.out.println("logout");
 		HomePage hp=new HomePage(driver);
 		hp.logOutFromApp();
 //		hp.getProfileImage().click();
@@ -79,6 +82,7 @@ public class BaseClass {
 	}
 	@AfterClass
 	public void configAC() {
+		System.out.println("close browser");
 		driver.quit();
 		
 	}
